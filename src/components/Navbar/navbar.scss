@@ -1,0 +1,43 @@
+.navbar {
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+
+    .pattern {
+        display: flex;
+        gap: 2px;
+
+        .circle {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+
+        .white { background-color: var(--color-white); }
+        .gray { background-color: var(--color-text); }
+        .primary { background-color: var(--color-primary); }
+    }
+
+    .logo {
+        font-size: var(--font-size-l);
+
+        span {
+            font-weight: bold;
+        }
+    }
+
+    .github {
+        letter-spacing: 2px;
+        color: var(--color-bg);
+        padding: 4px 14px;
+        background-color: var(--color-white);
+        border-radius: 5px;
+        transition: 0.3s linear;
+    }
+
+    .github:hover {
+        background-color: var(--color-text);
+    }
+}
