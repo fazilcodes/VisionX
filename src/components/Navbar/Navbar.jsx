@@ -11,7 +11,7 @@ const Navbar = () => {
 
         <p className='logo'><span>V</span>ision<span>X</span></p>
 
-        <a className='github' href="">GITHUB</a>
+        <a className='github' href="https://github.com/fazilcodes" >GITHUB</a>
     </nav>
   )
 }

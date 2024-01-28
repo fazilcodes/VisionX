@@ -9,10 +9,14 @@
   --color-border: #2B2A2A;
   --color-search: #1b1b1b;
 
-  --font-size-xl: 72px;
-  --font-size-l: 32px;
-  --font-size-sm: 20px;
-  --font-size-text: 16px;
+  /* 72px */
+  --font-size-xl: clamp(2rem, 1.3182rem + 3.6364vw, 4.5rem);
+  /* 32px */
+  --font-size-l: clamp(1.125rem, 0.8864rem + 1.2727vw, 2rem);
+  /* 20px */
+  --font-size-sm: clamp(0.875rem, 0.7727rem + 0.5455vw, 1.25rem);
+  /* 16px */
+  --font-size-text: clamp(0.75rem, 0.6818rem + 0.3636vw, 1rem);
 
 }
 
@@ -26,12 +30,27 @@
 }
 
 body {
+  min-height: 100vh;
   font-family: 'Space Grotesk', sans-serif;
   background-color: var(--color-bg);
   color: var(--color-white);
+  cursor: default;
 }
 
 .container {
   width: 95%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 0 auto;
+  padding: 20px 100px 10px 100px;
+}
+
+
+@media screen and (max-width: 1280px) {
+  .container {
+    width: 100%;
+    padding: 10px;
+  }
 }
