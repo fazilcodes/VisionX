@@ -7,7 +7,6 @@ import { useState } from 'react';
 import Card from '../../components/Card/Card';
 
 const Home = () => {
-
     const [items, setItems] = useState(Data)
     const categoriesItem = ['All', ...new Set(Data.map((item) => item.category))]
     const [input, setInput] = useState('')
@@ -25,15 +24,19 @@ const Home = () => {
     // Advanced Search with either category, author, keyword match
     const searchCategory = (e) => {
         e.preventDefault()
+
+        const searchWordsArray = input.trim().split(' ')
+        console.log(searchWordsArray);
+
         const newQuery = Data.filter((val) => {
             // Check if the input is present in the category or author
-            const isMatch = val.category.toLowerCase().includes(input.toLowerCase()) ||
-                            val.author.toLowerCase().includes(input.toLowerCase());
+            const isMatch = searchWordsArray.some((word) => val.category.toLowerCase().includes(word.toLowerCase())) ||
+                            searchWordsArray.some((word) => val.author.toLowerCase().includes(word.toLowerCase()));
     
             // Check if any keyword includes the input
-            const hasKeywordMatch = val.keyword.some((word) =>
-                word.toLowerCase().includes(input.toLowerCase())
-            );
+            const hasKeywordMatch = searchWordsArray.some((word) => val.keyword.some((key) =>
+            key.toLowerCase().includes(word.toLowerCase())
+        ));
     
             return isMatch || hasKeywordMatch;
         });

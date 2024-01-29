@@ -1,7 +1,15 @@
 .card_wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
+
+    .card_container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
 
     .card {
         display: flex;
@@ -37,6 +45,26 @@
                 color: var(--color-text);
             }
 
+        }
+    }
+
+    .load-more {
+        padding: 4px 14px;
+        border-radius: 5px;
+        font-size: var(--font-size-text);
+        color: var(--color-bg);
+        background-color: var(--color-primary);
+        cursor: pointer;
+        transition: 0.3s linear;
+    }
+
+    .load-more:hover {
+        background-color: var(--color-primary-variant);
+    }
+
+    @media screen and (max-width: 720px) {
+        .load-more {
+            padding: 2px 7px;
         }
     }
 }
