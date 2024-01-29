@@ -40,4 +40,19 @@
     .github:hover {
         background-color: var(--color-text);
     }
+
+    @media screen and (max-width: 720px) {
+
+        .pattern {
+            .circle {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .github {
+            letter-spacing: 1px;
+            padding: 2px 10px;
+        }
+    }
 }
