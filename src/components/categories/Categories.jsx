@@ -1,7 +1,7 @@
 import { useState } from "react"
 import './categories.scss'
 
-const Categories = ({categoriesItems, filterCategories}) => {
+const Categories = ({categoriesItems, filterCategories, setSearch}) => {
   const [active, setActive] = useState(0)
 
   const slicedCategories = categoriesItems.slice(0, 8)
@@ -12,6 +12,7 @@ const Categories = ({categoriesItems, filterCategories}) => {
             <button className={ active === id ? 'active': ''  } onClick={() => {
               setActive(id)
               filterCategories(item)
+              setSearch('')
             }} key={item}>{item}</button>
         ) ) }
     </div>

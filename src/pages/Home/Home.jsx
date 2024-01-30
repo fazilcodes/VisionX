@@ -12,6 +12,7 @@ const Home = () => {
     const [categories, setCategories] = useState([])
     const [searchPlaceholder, setSearchPlaceholder] = useState('search image')
     const [loadmore, setLoadmore] = useState(6)
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         const categoriesItem = ['All', ...new Set(Data.map((item) => item.category))]
@@ -44,15 +45,16 @@ const Home = () => {
                 const hasKeywordMatch = searchWordsArray.some((word) => val.keyword.some((key) =>
                 key.toLowerCase().includes(word.toLowerCase())
             ));
-        
                 return isMatch || hasKeywordMatch;
             });
             // Update the state with the filtered items
             setItems(newQuery);
             setSearchPlaceholder('search image')
             setLoadmore(6)
+            setSearch(input)
         } else {
             setSearchPlaceholder('enter something here...')
+            setSearch('')
         }
     }
 
@@ -74,7 +76,8 @@ const Home = () => {
         </div>
 
         <div className="home_bottom">
-            <Categories categoriesItems={categories} filterCategories={filterCategories}/>
+            <Categories categoriesItems={categories} filterCategories={filterCategories} setSearch={setSearch}/>
+            {search && <p className='search_input-state'>search result for " {search} "</p>}
             {items.length > 0 ? <Card item={items} loadmore={loadmore} setLoadmore={setLoadmore}/> : <p className='no-card'>No images available</p>}
         </div>
     </div>
