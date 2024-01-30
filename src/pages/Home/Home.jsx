@@ -3,18 +3,23 @@ import './home.scss'
 import Data from '../../assets/Data'
 
 import { BsSearch } from "react-icons/bs";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../../components/Card/Card';
 
 const Home = () => {
     const [items, setItems] = useState(Data)
-    const categoriesItem = ['All', ...new Set(Data.map((item) => item.category))]
     const [input, setInput] = useState('')
+    const [categories, setCategories] = useState([])
+
+    useEffect(() => {
+        const categoriesItem = ['All', ...new Set(Data.map((item) => item.category))]
+        setCategories(categoriesItem)
+    }, [Data])
+
 
     const filterCategories = (category) => {
         if ( category === 'All' ) {
-           setItems(Data)
-           return
+           return setItems(Data)
         }
 
         const newItems = Data.filter((item) => item.category === category)
@@ -43,6 +48,7 @@ const Home = () => {
     
         // Update the state with the filtered items
         setItems(newQuery);
+        
     }
 
   return (
@@ -63,7 +69,7 @@ const Home = () => {
         </div>
 
         <div className="home_bottom">
-            <Categories categoriesItems={categoriesItem} filterCategories={filterCategories}/>
+            <Categories categoriesItems={categories} filterCategories={filterCategories}/>
             {items.length > 0 ? <Card item={items}/> : <p className='no-card'>No images available</p>}
         </div>
     </div>
