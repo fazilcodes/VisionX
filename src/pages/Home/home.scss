@@ -136,6 +136,12 @@
 
         }
     }
+
+    @media screen and (max-width: 420px) {
+        .home_top {
+            padding-top: 20px;
+        }
+    }
     
     @media screen and (max-width: 350px) {
         .home_top {
