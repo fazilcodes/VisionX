@@ -10,6 +10,8 @@ const Home = () => {
     const [items, setItems] = useState(Data)
     const [input, setInput] = useState('')
     const [categories, setCategories] = useState([])
+    const [searchPlaceholder, setSearchPlaceholder] = useState('search image')
+    const [loadmore, setLoadmore] = useState(6)
 
     useEffect(() => {
         const categoriesItem = ['All', ...new Set(Data.map((item) => item.category))]
@@ -30,25 +32,28 @@ const Home = () => {
     const searchCategory = (e) => {
         e.preventDefault()
 
-        const searchWordsArray = input.trim().split(' ')
-        console.log(searchWordsArray);
+        if (input.length > 0) {
+            const searchWordsArray = input.trim().split(' ')
 
-        const newQuery = Data.filter((val) => {
-            // Check if the input is present in the category or author
-            const isMatch = searchWordsArray.some((word) => val.category.toLowerCase().includes(word.toLowerCase())) ||
-                            searchWordsArray.some((word) => val.author.toLowerCase().includes(word.toLowerCase()));
-    
-            // Check if any keyword includes the input
-            const hasKeywordMatch = searchWordsArray.some((word) => val.keyword.some((key) =>
-            key.toLowerCase().includes(word.toLowerCase())
-        ));
-    
-            return isMatch || hasKeywordMatch;
-        });
-    
-        // Update the state with the filtered items
-        setItems(newQuery);
+            const newQuery = Data.filter((val) => {
+                // Check if the input is present in the category or author
+                const isMatch = searchWordsArray.some((word) => val.category.toLowerCase().includes(word.toLowerCase())) ||
+                                searchWordsArray.some((word) => val.author.toLowerCase().includes(word.toLowerCase()));
         
+                // Check if any keyword includes the input
+                const hasKeywordMatch = searchWordsArray.some((word) => val.keyword.some((key) =>
+                key.toLowerCase().includes(word.toLowerCase())
+            ));
+        
+                return isMatch || hasKeywordMatch;
+            });
+            // Update the state with the filtered items
+            setItems(newQuery);
+            setSearchPlaceholder('search image')
+            setLoadmore(6)
+        } else {
+            setSearchPlaceholder('enter something here...')
+        }
     }
 
   return (
@@ -60,7 +65,7 @@ const Home = () => {
                 <form className="search">
                     <div className="input_content">
                         <BsSearch className='icon'/>
-                        <input onChange={(e) => setInput(e.target.value)} className='input_search' type="text" placeholder='search image' />
+                        <input onChange={(e) => setInput(e.target.value)} className='input_search' type="text" placeholder={searchPlaceholder} />
                     </div>
                     <button onClick={searchCategory} className='search_btn' href="">Search</button>
                 </form>
@@ -70,7 +75,7 @@ const Home = () => {
 
         <div className="home_bottom">
             <Categories categoriesItems={categories} filterCategories={filterCategories}/>
-            {items.length > 0 ? <Card item={items}/> : <p className='no-card'>No images available</p>}
+            {items.length > 0 ? <Card item={items} loadmore={loadmore} setLoadmore={setLoadmore}/> : <p className='no-card'>No images available</p>}
         </div>
     </div>
   )

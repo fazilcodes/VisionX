@@ -11,9 +11,8 @@ function shuffleArray(array) {
     return array;
 }  
 
-const Card = ({ item }) => {
+const Card = ({ item, loadmore, setLoadmore }) => {
     const [shuffledItems, setShuffledItems] = useState([]);
-    const [loadmore, setLoadMore] = useState(6);
   
     useEffect(() => {
       // Shuffle the items only once on the initial load
@@ -23,7 +22,7 @@ const Card = ({ item }) => {
   
     const loadMoreFunction = (e) => {
       e.preventDefault();
-      setLoadMore((prev) => prev + 3);
+      setLoadmore((prev) => prev + 3);
     };
   
     const displayItems = shuffledItems.slice(0, loadmore);
